@@ -1,16 +1,109 @@
-# React + Vite
+# AgriNegosyo: DTI-DA Price Compliance & Market Intelligence Bridge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[cite_start]This system automatically parses the weekly DA Price PDF into JSON, compares it with MSME inventory prices, and triggers a Webhook alert if a retailer’s price exceeds the current SRP by >10%[cite: 1]. [cite_start]It addresses SDG 2 (Zero Hunger) and SDG 9 (Industry, Innovation, and Infrastructure)[cite: 1].
 
-Currently, two official plugins are available:
+## Team Members
+* [cite_start]**Mark Lawrence Lacdao** - Backend/API [cite: 1]
+* [cite_start]**Axyll Judd Picardal** - Data/Price Parsing [cite: 1]
+* [cite_start]**Aldrin Rey Taberara** - Frontend/MSME Dashboard [cite: 1]
+* [cite_start]**Christian Catada** - Data Analysis/Database [cite: 1]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Technical Stack
+* [cite_start]**Backend:** PHP (Laravel), MySQL [cite: 1]
+* **Frontend:** React (Vite), Tailwind CSS
+* [cite_start]**Security:** Hashed identifiers for data privacy [cite: 1]
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Getting Started: Local Setup Guide
 
-## Expanding the ESLint configuration
+### Prerequisites
+Make sure you have the following installed on your machine:
+* [XAMPP](https://www.apachefriends.org/) or Laragon (for PHP and MySQL)
+* [Composer](https://getcomposer.org/) (for Laravel dependencies)
+* [Node.js](https://nodejs.org/) (for Frontend dependencies)
+* Git
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Part 1: Backend (Laravel API) Setup
+1. **Clone the repository:**
+   ```bash
+   git clone <your-backend-repo-url>
+   cd agrinegosyo-backend
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   composer install
+   ```
+
+3. **Environment Setup:**
+   
+   Copy the example env file: cp .env.example .env
+
+    Generate the app key: php artisan key:generate
+
+    Open .env and configure your database:
+
+      Code snippet
+      
+        DB_CONNECTION=mysql
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+        DB_DATABASE=agrinegosyo
+        DB_USERNAME=root
+        DB_PASSWORD=
+
+   Add the Discord Webhook for alerts:
+
+      Code snippet
+
+        ALERT_WEBHOOK_URL="your_discord_webhook_url_here"
+
+4. **Run Database Migrations:**
+    (Ensure MySQL is running via XAMPP before doing this)
+
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+    
+   Start the Backend Server:
+    ```bash
+    php artisan serve
+    ```
+
+    The API will now be running at http://127.0.0.1:8000
+
+### Part 2: Frontend (React/Vite) Setup
+
+1. **Clone the repository:**
+    (Open a new terminal window)
+   
+    ```bash
+    git clone <your-frontend-repo-url>
+    cd agrinegosyo-frontend
+    ```
+
+3. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+5. **Start the Frontend Server:**
+
+    ```bash
+    npm run dev
+    ```
+
+The dashboard will now be visible at http://localhost:5173
+
+### 🛠️ Commands for Testing
+
+Trigger the DA Price Parser:
+
+To manually test the CSV parsing and trigger Discord alerts for overpricing violations, run:
+
+  ```bash
+  php artisan prices:fetch-da
+  ```
