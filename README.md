@@ -41,9 +41,9 @@ Make sure you have the following installed on your machine:
    
    Copy the example env file: cp .env.example .env
 
-    Generate the app key: php artisan key:generate
+   Generate the app key: php artisan key:generate
 
-    Open .env and configure your database:
+   Open .env and configure your database:
 
       Code snippet
       
@@ -61,7 +61,7 @@ Make sure you have the following installed on your machine:
         ALERT_WEBHOOK_URL="your_discord_webhook_url_here"
 
 4. **Run Database Migrations:**
-    (Ensure MySQL is running via XAMPP before doing this)
+    *(Ensure MySQL is running via XAMPP before doing this)*
 
     ```bash
     php artisan migrate:fresh --seed
@@ -77,7 +77,7 @@ Make sure you have the following installed on your machine:
 ### Part 2: Frontend (React/Vite) Setup
 
 1. **Clone the repository:**
-    (Open a new terminal window)
+    *(Open a new terminal window)*
    
     ```bash
     git clone <your-frontend-repo-url>
@@ -91,9 +91,10 @@ Make sure you have the following installed on your machine:
     ```
 
 5. **Start the Frontend Server:**
-
+   *(Note: The legacy-peer-deps flag is required to bypass a known strict version conflict between Vite 8 and Tailwind CSS)*
+   
     ```bash
-    npm run dev
+   npm install --legacy-peer-deps
     ```
 
 The dashboard will now be visible at http://localhost:5173
